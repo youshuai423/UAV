@@ -4,7 +4,7 @@ ScoutedSameTime = [];
 for i = 1:68
   for j =1 :68
     distance(i,j) = sqrt((AX(i) - AX(j))^2 + (AY(i) - AY(j))^2);
-    if distance(i, j) <= 2 && i ~= j
+    if distance(i, j) <= 6 && i ~= j
       ScoutedSameTime = [ScoutedSameTime; [i,j]];
     end
   end
