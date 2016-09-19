@@ -24,10 +24,28 @@ for i = 1:l
     end
 end
 
+hold on;
+scatter(Node(:,1), Node(:, 2));
 scatter(Node(track(1), 1), Node(track(1), 2), 'r');
 
-for i =1 : numNode - 1
+for i = 1 : numNode - 1    
+    %[outsideCircleX, outsideCircleY] = scircle(Node(i, 1), Node(i, 2), 8);
+    %(outsideCircleX, outsideCircleY, 'y')
     distanceBetween(i) = sqrt((Node(track(i), 1) - Node(track(i + 1), 1))^2 ...
                      + (Node(track(i), 2) - Node(track(i + 1), 2))^2);
-    line([Node(track(i),1), Node(track(i+1),1)], [Node(track(i),2), Node(track(i+1),2)]);
+    %line([Node(track(i),1), Node(track(i+1),1)], [Node(track(i),2), Node(track(i+1),2)]);
 end
+
+for i = 1 : numNode - 1
+    %[insideCircleX, insideCircleY] = scircle(Node(i, 1), Node(i, 2), 2);
+    %fill(insideCircleX, insideCircleY, 'w')
+end
+
+for i = 1 : numNode
+    %[insideCircleX, insideCircleY] = scircle(Node(i, 1), Node(i, 2), 2);
+    [outsideCircleX, outsideCircleY] = scircle(Node(i, 1), Node(i, 2), sqrt(7.5^2 - 25));
+    %plot(insideCircleX, insideCircleY)
+    plot(outsideCircleX, outsideCircleY)
+end
+
+hold off;
