@@ -1,15 +1,11 @@
+% 判断是否所有目标群都被侦察
 function isallScouted = allScouted(chromosome)
 truncated = [];
-% false = 0;
 for i = 1:10:length(chromosome)
     index = find(chromosome(i : i + 9) == 0, 1) - 1;
     if (isempty(index))
         index = 10;
     end
-%     if length(unique(chromosome(i : i + index - 1))) ~= length(chromosome(i : i + index - 1))
-%         false = 1;
-%         break;
-%     end
     truncated = [truncated, chromosome(i : i + index - 1)];
 end
 

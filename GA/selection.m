@@ -1,10 +1,6 @@
 % 轮盘赌选择操作
-% population_size: 种群大小
-% chromosome_size: 染色体长度
-% elitism: 是否精英选择
-
 function population = selection(population, elitism, fitness_sum)
-
+% elitism 精英选择
 [population_size, chromosome_size] = size(population);
 population_new = zeros(population_size, chromosome_size);
 

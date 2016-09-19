@@ -1,12 +1,7 @@
-% 对个体按适应度大小进行排序，并且保存最佳个体
-% population_size: 种群大小
-% chromosome_size: 染色体长度
-
+% 对个体按适应度大小进行排序
 function [fitness_sum, fitness_average, best_fitness, best_individual, best_generation, bestDistance] = ...
          rank(population, fitnessValue, offspring, best_fitness, best_individual, best_generation)
-
 [population_size, ~] = size(population);
-
 fitness_sum = zeros(population_size,1);
 
 % 遍历种群 

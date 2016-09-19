@@ -1,10 +1,5 @@
-% 单点变异操作
-% population_size: 种群大小
-% chromosome_size: 染色体长度
-% mutate_rate: 变异概率
-
+% 变异操作，随机选择两个基因并交换
 function population = mutation(population, mutate_rate)
-
 [population_size, chromosome_size] = size(population);
 
 for i=1:population_size
@@ -17,12 +12,13 @@ for i=1:population_size
                 % 若变异位置为0，不变异
                 continue;
             end
+            % 交换基因
             temp = population1(mutate_position1);
             population1(mutate_position1) = population1(mutate_position2);
             population1(mutate_position2) = temp;
-            population1 = merge(population1);
+            population1 = merge(population1); % 消除相邻相同基因
             
-            if allScouted(population1)
+            if allScouted(population1)  % 判断所有目标群均被侦察
                 population(i, :) = population1;
                 break;
             end
