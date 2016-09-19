@@ -20,7 +20,7 @@ for i = 1 : population_size
             fitnessValue(i) = fitnessValue(i) + 140;
         end
     end
-    fitnessValue(i) = 1 / fitnessValue(i); %-----------转换成最大值？？
+    fitnessValue(i) = 500 / fitnessValue(i); %-----------转换成最大值？？
 end
 
 clear i j k;

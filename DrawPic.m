@@ -1,18 +1,18 @@
-scatter(HomeBaseX, HomeBaseY)
+scatter(HomeBase(:, 1), HomeBase(:, 2))
 hold;
-scatter(A01_X, A01_Y, 'd', 'r')
-scatter(A02_X, A02_Y, 'd', 'g')
-scatter(A03_X, A03_Y, 'd', 'y')
-scatter(A04_X, A04_Y, 'd', 'c')
-scatter(A05_X, A05_Y, 'd', 'm')
-scatter(A06_X, A06_Y, 'd', 'k')
-scatter(A07_X, A07_Y, 's', 'r')
-scatter(A08_X, A08_Y, 's', 'g')
-scatter(A09_X, A09_Y, 's', 'y')
-scatter(A10_X, A10_Y, 's', 'c')
+scatter(A1(:, 1), A1(:, 2), 'd', 'r')
+scatter(A2(:, 1), A2(:, 2), 'd', 'g')
+scatter(A3(:, 1), A3(:, 2), 'd', 'y')
+scatter(A4(:, 1), A4(:, 2), 'd', 'c')
+scatter(A5(:, 1), A5(:, 2), 'd', 'm')
+scatter(A6(:, 1), A6(:, 2), 'd', 'k')
+scatter(A7(:, 1), A7(:, 2), 's', 'r')
+scatter(A8(:, 1), A8(:, 2), 's', 'g')
+scatter(A9(:, 1), A9(:, 2), 's', 'y')
+scatter(A10(:, 1), A10(:, 2), 's', 'c')
 
 for i=1:10
-  [radarx, radary] = scircle(RadarX(i), RadarY(i), 70);
+  [radarx, radary] = scircle(Radar(i, 1), Radar(i, 2), 70);
   plot(radarx, radary)
 end
 

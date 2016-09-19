@@ -1,24 +1,21 @@
-P = perms(1:10); % 生成1~10的所有排列组合
+function [minDistance, track, distanceBetween] = EnumScout(Node)
+[numNode, ~] = size(Node);
+P = perms(1:numNode); % 生成1~10的所有排列组合
 l = length(P);
-distanceT2T = zeros(11, 11);
-distanceB2T = zeros(10);
-distanceTotal = 0;
+distanceT2T = zeros(numNode);
 
 minDistance = inf;
 track = [];
   
-for i = 1:10
-    for j = 1:10
-        distanceT2T(i, j) = sqrt((x_y(i, 1) - x_y(j, 1))^2 + (x_y(i, 2) - x_y(j, 2))^2);
-        %distanceT2T(i, j) = sqrt((leidazhan(i, 1) - leidazhan(j, 1))^2 + (leidazhan(i, 2) - leidazhan(j, 2))^2);
+for i = 1:numNode
+    for j = 1:numNode
+        distanceT2T(i, j) = sqrt((Node(i, 1) - Node(j, 1))^2 + (Node(i, 2) - Node(j, 2))^2);
     end
-    %distanceB2T(i) = sqrt((368 - x_y(i, 1))^2 + (319 - x_y(i, 2))^2);
 end
 
 for i = 1:l
-    %distanceTotal = distanceB2T(P(i, 1)) + distanceB2T(P(i, 10));
     distanceTotal = 0;
-    for j = 1:9
+    for j = 1 : numNode - 1
         distanceTotal = distanceTotal + distanceT2T(P(i, j), P(i, j + 1));
     end
     if distanceTotal < minDistance
@@ -27,7 +24,10 @@ for i = 1:l
     end
 end
 
-for i =1:9
-    line([x_y(track(i),1), x_y(track(i+1),1)], [x_y(track(i),2), x_y(track(i+1),2)]);
-    %line([leidazhan(track(i),1), leidazhan(track(i+1),1)], [leidazhan(track(i),2), leidazhan(track(i+1),2)]);
+scatter(Node(track(1), 1), Node(track(1), 2), 'r');
+
+for i =1 : numNode - 1
+    distanceBetween(i) = sqrt((Node(track(i), 1) - Node(track(i + 1), 1))^2 ...
+                     + (Node(track(i), 2) - Node(track(i + 1), 2))^2);
+    line([Node(track(i),1), Node(track(i+1),1)], [Node(track(i),2), Node(track(i+1),2)]);
 end

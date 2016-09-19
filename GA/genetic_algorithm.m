@@ -25,26 +25,28 @@ fitnessValue = 0;
 fitness_average = 0;
 best_individual = [];
 best_generation = [];
+bestDistance = [];
 best_fitness = 0;
 best_generation = 0;
 
 population = init(population_size, chromosome_size); % 初始化
+%population = init2(population_size, chromosome_size); % 初始化
 
 for offspring = 1 : generation_size   
     fitnessValue = fitness(population, distanceT2T);              % 计算适应度 
-    [fitness_sum, fitness_average, best_fitness, best_individual, best_generation]...
+    [fitness_sum, fitness_average(offspring), best_fitness, best_individual, best_generation, bestDistance(offspring)]...
         = rank(population, fitnessValue, offspring, best_fitness,best_individual, best_generation);                 % 对个体按适应度大小进行排序
     population = selection(population, elitism, fitness_sum);   % 选择操作
     population = crossover(population, cross_rate);% 交叉操作
     population = mutation(population, mutate_rate);% 变异操作
-    1 / best_fitness
+    %[500 / best_fitness offspring]
 end
 
-plotGA(generation_size, fitness_average);% 打印算法迭代过程
+%plotGA(generation_size, fitness_average);% 打印算法迭代过程
 t = 1 : generation_size;
-scatter(t, 1 / fitness_average);
-hold;
-scatter(t, 1 / fitness_average);
+% scatter(t, 500 ./ fitness_average);
+% hold;
+scatter(t, bestDistance, '.');
 
 m = best_individual;    % 获得最佳个体
 n = best_fitness;       % 获得最佳适应度

@@ -2,7 +2,7 @@
 % population_size: 种群大小
 % chromosome_size: 染色体长度
 
-function [fitness_sum, fitness_average, best_fitness, best_individual, best_generation] = ...
+function [fitness_sum, fitness_average, best_fitness, best_individual, best_generation, bestDistance] = ...
          rank(population, fitnessValue, offspring, best_fitness, best_individual, best_generation)
 
 [population_size, ~] = size(population);
@@ -42,11 +42,11 @@ for i = 2:population_size
 end
 
 % fitness_average(offspring) = 第offspring次迭代 个体的平均适应度
-fitness_average(offspring) = fitness_sum(population_size) / population_size; 
-
+fitness_average = fitness_sum(population_size) / population_size; 
+bestDistance = 500 / fitnessValue(population_size);
 % 更新最大适应度和对应的迭代次数，保存最佳个体(最佳个体的适应度最大)
 if fitnessValue(population_size) > best_fitness
-    best_fitness(offspring) = fitnessValue(population_size);
+    best_fitness = fitnessValue(population_size);
     best_generation = offspring;
     best_individual = population(population_size,:);
 end
