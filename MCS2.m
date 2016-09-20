@@ -1,4 +1,9 @@
+% FY-1搭载S2时每个目标群内部最小路径查找——蒙特卡罗法
 function [fitNode, mindist] = MCS2(TargetGroup, runNum)
+% TargetGroup 目标群
+% runNum 蒙特卡罗循环次数
+
+% 限制随机取样范围
 Area = [min(TargetGroup(:,1)) - 5, max(TargetGroup(:,1) + 5); ...
         min(TargetGroup(:,2)) - 5, max(TargetGroup(:,2)) + 5;];
 [numTarget, ~] = size(TargetGroup);
@@ -6,7 +11,7 @@ TargetCovered = [];
 distanceT = 0;
 mindist = inf;
 
-for i = 1 : 5
+for i = 1 : 6
 %     if mindist ~= inf
 %         break;
 %     end
@@ -43,4 +48,9 @@ for i = 1 : 5
         TargetCovered = [];
         distanceT = 0;
     end
+end
+
+if mindist == inf
+    fitNode = -1;
+    mindist = -1;
 end

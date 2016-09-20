@@ -1,4 +1,10 @@
+% FY-1搭载S1时每个目标群内部最小路径查找——蒙特卡罗法
 function [fitNode, mindist] = MCS1(TargetGroup, LeftRight, runNum)
+% TargetGroup 目标群
+% LeftRight 点相对无人机方位
+% runNum 蒙特卡罗循环次数
+
+% 限制随机取样范围
 Area = [min(TargetGroup(:,1)) - 5, max(TargetGroup(:,1) + 5); ...
         min(TargetGroup(:,2)) - 5, max(TargetGroup(:,2)) + 5;];
 [numTarget, ~] = size(TargetGroup);
@@ -12,6 +18,7 @@ for i = 2 : 5
 %     end
     
     for runNow = 1 : runNum
+        % 生成随机点代表线段
         for j = 1 : i
             fitTemp(j, 1) = rand * (Area(1, 2) - Area(1, 1)) + Area(1, 1);
             fitTemp(j, 2) = rand * (Area(2, 2) - Area(2, 1)) + Area(2, 1);
@@ -20,6 +27,7 @@ for i = 2 : 5
         for j = 1 : i - 1
             q1 = fitTemp(j, :);
             q2 = fitTemp(j + 1, :);
+            % 判断线段代表的轨迹可以侦察的目标
             for k = 1 : numTarget
                 verticalDist = juli(q1(1), q1(2), q2(1), q2(2), TargetGroup(k, 1), TargetGroup(k, 2));
                 if abs(verticalDist) >= 2 && abs(verticalDist) <= 8 && sign(verticalDist) == LeftRight
@@ -34,16 +42,8 @@ for i = 2 : 5
             TargetCovered = [TargetCovered, 0];
         end
 
+        % 所有店都可以侦察到，判断是否路径最短
         if length(unique(TargetCovered)) == numTarget + 1
-%             P = perms(1 : i);
-%             [rownum, colnum] = size(P);
-%             for m = 1 : rownum
-%                 for n = 1 : colnum - 1
-%                     distanceT = distanceT + (fitTemp(P(m, n), 1) ...
-%                                - fitTemp(P(m, n + 1), 1))^2 + ...
-%                                (fitTemp(P(m, n), 2) - fitTemp(P(m, n + 1), 2))^2;
-%                 end
-%             end    
             for m = 1 : i - 1
                 distanceT = distanceT + sqrt((fitTemp(m, 1) - fitTemp(m + 1, 1))^2 ...
                             + (fitTemp(m, 2) - fitTemp(m + 1, 2))^2);
@@ -58,4 +58,8 @@ for i = 2 : 5
         TargetCovered = [];
         distanceT = 0;
     end
+end
+
+if mindist == inf
+    [fitNode, mindist] = [-1, -1];
 end

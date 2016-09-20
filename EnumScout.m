@@ -1,8 +1,9 @@
+% 穷举所有路线
 function [minDistance, track, distanceBetween] = EnumScout(Node)
 [numNode, ~] = size(Node);
 P = perms(1:numNode); % 生成1~10的所有排列组合
 l = length(P);
-distanceT2T = zeros(numNode);
+distanceT2T = zeros(numNode); % 目标群间距离
 
 minDistance = inf;
 track = [];
@@ -29,8 +30,6 @@ scatter(Node(:,1), Node(:, 2));
 scatter(Node(track(1), 1), Node(track(1), 2), 'r');
 
 for i = 1 : numNode - 1    
-    %[outsideCircleX, outsideCircleY] = scircle(Node(i, 1), Node(i, 2), 8);
-    %(outsideCircleX, outsideCircleY, 'y')
     distanceBetween(i) = sqrt((Node(track(i), 1) - Node(track(i + 1), 1))^2 ...
                      + (Node(track(i), 2) - Node(track(i + 1), 2))^2);
     %line([Node(track(i),1), Node(track(i+1),1)], [Node(track(i),2), Node(track(i+1),2)]);
@@ -42,10 +41,10 @@ for i = 1 : numNode - 1
 end
 
 for i = 1 : numNode
-    %[insideCircleX, insideCircleY] = scircle(Node(i, 1), Node(i, 2), 2);
-    [outsideCircleX, outsideCircleY] = scircle(Node(i, 1), Node(i, 2), sqrt(7.5^2 - 25));
-    %plot(insideCircleX, insideCircleY)
-    plot(outsideCircleX, outsideCircleY)
+%     [insideCircleX, insideCircleY] = scircle(Node(i, 1), Node(i, 2), 2);
+     [outsideCircleX, outsideCircleY] = scircle(Node(i, 1), Node(i, 2), sqrt(7.5^2 - 25));
+%     plot(insideCircleX, insideCircleY)
+     plot(outsideCircleX, outsideCircleY)
 end
 
 hold off;

@@ -1,5 +1,6 @@
+% 对基地、敌方目标以及雷达探测范围进行画图
 scatter(HomeBase(:, 1), HomeBase(:, 2))
-hold;
+hold on;
 scatter(A1(:, 1), A1(:, 2), 'd', 'r')
 scatter(A2(:, 1), A2(:, 2), 'd', 'g')
 scatter(A3(:, 1), A3(:, 2), 'd', 'y')
@@ -16,5 +17,5 @@ for i=1:10
   plot(radarx, radary)
 end
 
-hold;
+hold off;
 
